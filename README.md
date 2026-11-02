@@ -181,3 +181,8 @@ Quick options:
 - All order/profile endpoints require a valid JWT in the `Authorization: Bearer <token>` header
 - H2 console is **disabled in production** profile
 - Change the `jwt.secret` in `application.properties` before deploying!
+# stock-management-retail-inventory-
+  stock management system for retail inventory 
+
+
+
