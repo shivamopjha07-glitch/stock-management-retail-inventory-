@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Production-Ready Agile Project Workbook Dashboard for Epic Sports E-Commerce Platform, strictly compliant with ABABE-ABE-45 Guidelines.">
+  <title>Epic Sports &bull; Agile Project Workbook & Interactive Suite</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-surface: #131b2e;
+      --bg-card: #18233c;
+      --border-color: #243354;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.2);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --tan: #d2b48c;
+      --tan-bg: rgba(210, 180, 140, 0.22);
+      --tan-border: #d2b48c;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #f1f5f9;
+      --border-color: #cbd5e1;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --accent: #0284c7;
+      --accent-glow: rgba(2, 132, 199, 0.15);
+      --tan: #92400e;
+      --tan-bg: #fef3c7;
+      --tan-border: #d97706;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Top Sticky Header */
+    header {
+      background: rgba(19, 27, 46, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 0.85rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    [data-theme="light"] header {
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: white;
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
+      letter-spacing: -0.05em;
+    }
+
+    .brand-text h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-text p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .btn-action {
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+      text-decoration: none;
+      font-family: inherit;
+    }
+
+    .btn-action:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: white !important;
+      border: none;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.45);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 1.75rem 2rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* Control Bar: Search & Status Filters */
+    .controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.85rem 1.25rem;
+    }
+
+    .search-input-wrap {
+      position: relative;
+      flex: 1;
+      max-width: 360px;
+    }
+
+    .search-input-wrap input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.55rem 1rem 0.55rem 2.2rem;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    .search-input-wrap input:focus {
+      border-color: var(--accent);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .pill-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.35rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .pill-btn:hover, .pill-btn.active {
+      background: var(--accent);
+      color: #0b0f19;
+      border-color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* KPI Summary Row */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .kpi-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    .kpi-title {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+    }
+
+    .kpi-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .kpi-sub {
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-top: 0.35rem;
+    }
+
+    /* Tabs Navbar */
+    .tabs-wrapper {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.45rem;
+      margin-bottom: 1.5rem;
+      overflow-x: auto;
+      display: flex;
+      gap: 0.35rem;
+      scrollbar-width: thin;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.65rem 1rem;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: #0b0f19 !important;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+    }
+
+    /* Content Cards */
+    .tab-content {
+      display: none;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.75rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .content-header {
+      margin-bottom: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .content-title h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+    }
+
+    .content-title p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 0.2rem;
+    }
+
+    .guideline-alert {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 4px solid var(--accent);
+      padding: 0.75rem 1.1rem;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.82rem;
+      color: var(--text-main);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    /* Table Design */
+    .table-container {
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    thead th {
+      background: var(--bg-card);
+      color: var(--text-main);
+      padding: 0.85rem 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.74rem;
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border-color);
+      transition: background 0.15s;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    [data-theme="light"] tbody tr:hover {
+      background: #f1f5f9;
+    }
+
+    tbody td {
+      padding: 0.85rem 1rem;
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+
+    .font-mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+
+    .badge-completed { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+    .badge-progress { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+    .badge-ready { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+    .badge-planned { background: rgba(148, 163, 184, 0.15); color: #94a3b8; }
+    .badge-must { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+    .badge-should { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+    .badge-could { background: rgba(148, 163, 184, 0.15); color: #94a3b8; }
+
+    /* LMS Tan Colour Encoding for Escalated Risks */
+    tr.risk-tan {
+      background: var(--tan-bg) !important;
+      border-left: 4px solid var(--tan-border);
+    }
+
+    tr.risk-tan td {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .badge-tan {
+      background: #92400e;
+      color: #fef3c7;
+      border: 1px solid var(--tan-border);
+    }
+
+    /* 5x5 Risk Battle Map Matrix */
+    .battle-map-grid {
+      display: grid;
+      grid-template-columns: 140px repeat(5, 1fr);
+      gap: 4px;
+      margin-top: 1rem;
+      background: var(--border-color);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 4px;
+    }
+
+    .matrix-header {
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-align: center;
+      padding: 0.6rem;
+      border-radius: 4px;
+    }
+
+    .matrix-cell {
+      background: var(--bg-surface);
+      min-height: 52px;
+      padding: 0.4rem;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .matrix-cell.cell-tan {
+      background: var(--tan-bg);
+      border: 1px solid var(--tan-border);
+      font-weight: 700;
+      color: #fef3c7;
+    }
+
+    .matrix-cell.cell-green {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+    }
+
+    .matrix-cell.cell-blue {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent);
+    }
+
+    /* Opportunity Strategies */
+    .strat-exploit { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+    .strat-co-leverage { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+    .strat-transfer { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+    .strat-hold { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+    .strat-drop { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+
+    /* Burndown Visuals */
+    .chart-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .burndown-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .burndown-label {
+      width: 150px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .burndown-bar-wrap {
+      flex: 1;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .burndown-bar-actual {
+      height: 100%;
+      background: linear-gradient(90deg, #f97316, #ea580c);
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+
+    .burndown-bar-ideal {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: #38bdf8;
+      box-shadow: 0 0 8px #38bdf8;
+    }
+
+    .burndown-val {
+      width: 60px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    /* Print Setup */
+    @media print {
+      header, .controls-bar, .tabs-wrapper, .btn-action { display: none !important; }
+      body, .container { background: white !important; color: black !important; padding: 0 !important; }
+      .tab-content { display: block !important; border: none !important; box-shadow: none !important; page-break-after: always; }
+      table { border: 1px solid #000 !important; }
+      th, td { border: 1px solid #ddd !important; color: #000 !important; }
+    }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <!-- Header -->
+  <header>
+    <div class="brand-group">
+      <div class="brand-logo">ES</div>
+      <div class="brand-text">
+        <h1>Epic Sports Agile Project Dashboard</h1>
+        <p>HCLTech Career Shaper LMS &bull; ABABE-ABE-45 Guidelines Compliant</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-action" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+        <span id="themeIcon">☀️</span> Theme
+      </button>
+      <button class="btn-action" onclick="window.print()" title="Print / Save PDF">
+        🖨️ Print
+      </button>
+      <button class="btn-action" onclick="exportTableToCSV()" title="Export current sheet to CSV">
+        📊 Export CSV
+      </button>
+      <a href="./Epic_Sports_Agile_Project_Workbook.xlsx" download class="btn-action btn-primary" title="Download Excel File">
+        📥 Download .XLSX
+      </a>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search stories, risks, defects..." oninput="handleSearch()">
+      </div>
+
+      <div class="filter-pills" id="statusFilterPills">
+        <button class="pill-btn active" onclick="filterByStatus('all')">All Items</button>
+        <button class="pill-btn" onclick="filterByStatus('Completed')">Completed</button>
+        <button class="pill-btn" onclick="filterByStatus('In Progress')">In Progress</button>
+        <button class="pill-btn" onclick="filterByStatus('Ready')">Ready</button>
+        <button class="pill-btn" onclick="filterByStatus('Planned')">Planned</button>
+      </div>
+    </div>
+
+    <!-- KPI Summary Row -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-title">Total User Stories</div>
+        <div class="kpi-value" id="kpiStories">15</div>
+        <div class="kpi-sub">5 Done &bull; 3 In Progress &bull; 7 Planned</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Total Story Points</div>
+        <div class="kpi-value">100 pts</div>
+        <div class="kpi-sub">Sprint 1 Velocity: 28 pts</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Total Team Effort</div>
+        <div class="kpi-value">698 hrs</div>
+        <div class="kpi-sub">Dev: 464 hrs &bull; QA: 234 hrs</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Story Clarity Index</div>
+        <div class="kpi-value" style="color: #10b981;">91.5%</div>
+        <div class="kpi-sub">High Clarity &bull; Ready for Sprints</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">Escalated Risks</div>
+        <div class="kpi-value" style="color: var(--tan);">2 Active</div>
+        <div class="kpi-sub">Tan color coded (Exposure &ge; 15)</div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs-wrapper" id="tabNav">
+      <button class="tab-btn active" onclick="switchTab('tab-proj-info')">Project Information</button>
+      <button class="tab-btn" onclick="switchTab('tab-backlog')">Product Backlog</button>
+      <button class="tab-btn" onclick="switchTab('tab-estimation')">Estimation</button>
+      <button class="tab-btn" onclick="switchTab('tab-burndown')">Product Burndown</button>
+      <button class="tab-btn" onclick="switchTab('tab-resources')">Resource Plan</button>
+      <button class="tab-btn" onclick="switchTab('tab-it')">IT Services Plan</button>
+      <button class="tab-btn" onclick="switchTab('tab-training')">Training Plan</button>
+      <button class="tab-btn" onclick="switchTab('tab-risks')">Risk Management</button>
+      <button class="tab-btn" onclick="switchTab('tab-opps')">Opportunity Management</button>
+      <button class="tab-btn" onclick="switchTab('tab-defects')">Defects / Comments</button>
+      <button class="tab-btn" onclick="switchTab('tab-impediments')">Impediments Log</button>
+      <button class="tab-btn" onclick="switchTab('tab-actions')">Action Items</button>
+      <button class="tab-btn" onclick="switchTab('tab-sci')">Story Clarity Index</button>
+    </div>
+
+    <!-- TAB 1: Project Information -->
+    <div id="tab-proj-info" class="tab-content active">
+      <div class="content-header">
+        <div class="content-title">
+          <h2>Project Information Log & Contents</h2>
+          <p>Core metadata, governance metrics, and version-controlled revision history.</p>
+        </div>
+      </div>
+
+      <div class="guideline-alert">
+        <strong>LMS Guideline Rule:</strong> Date format is <code>dd-MMM-yy</code>. Colored cells are auto-calculated and protected; only edit unshaded/white cells.
+      </div>
+
+      <div class="table-container" style="margin-bottom: 2rem;">
+        <table id="table-proj-info">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Project Value</th>
+              <th>Parameter</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Project Name</strong></td><td>Epic Sports E-Commerce Web & Mobile Platform</td><td><strong>Start Date</strong></td><td class="font-mono">01-Nov-26</td></tr>
+            <tr><td><strong>Project Code</strong></td><td class="font-mono">ESP-AGL-2026-045</td><td><strong>Target Release Date</strong></td><td class="font-mono">15-Feb-27</td></tr>
+            <tr><td><strong>Scrum Master</strong></td><td>Ananya Roy</td><td><strong>Current Sprint</strong></td><td>Sprint 2 (Active)</td></tr>
+            <tr><td><strong>Product Owner</strong></td><td>David Miller (VP Retail & Digital)</td><td><strong>Release Number</strong></td><td>Release 1 (Core Storefront)</td></tr>
+            <tr><td><strong>Technical Lead</strong></td><td>Vikram Prajapati</td><td><strong>Methodology</strong></td><td>Scrum / Agile Framework</td></tr>
+            <tr><td><strong>Client / Sponsor</strong></td><td>Epic Sports Inc. USA</td><td><strong>Workbook Version</strong></td><td>Version 1.2 (Production Ready)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-bottom: 1rem; font-family: 'Outfit';">Revision History of this Workbook</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Rev #</th>
+              <th>Date</th>
+              <th>Author</th>
+              <th>Reviewed By</th>
+              <th>Description of Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono">1.0</td><td class="font-mono">01-Nov-26</td><td>Ananya Roy</td><td>David Miller</td><td>Initial baseline creation of Agile Project Workbook and Product Backlog</td></tr>
+            <tr><td class="font-mono">1.1</td><td class="font-mono">08-Nov-26</td><td>Vikram Prajapati</td><td>Rajesh Sharma</td><td>Updated estimation effort breakdown, IT services plan, and training matrix</td></tr>
+            <tr><td class="font-mono">1.2</td><td class="font-mono">15-Nov-26</td><td>Ananya Roy</td><td>David Miller</td><td>Sprint 1 closure (28 pts achieved), Sprint 2 burndown update, risk escalation review</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 2: Product Backlog -->
+    <div id="tab-backlog" class="tab-content">
+      <div class="content-header">
+        <div class="content-title">
+          <h2>Product Backlog</h2>
+          <p>Master user stories list. Stories automatically propagate to Estimation and SCI sheets.</p>
+        </div>
+      </div>
+
+      <div class="guideline-alert">
+        <strong>LMS Guideline Rule:</strong> Add Story # to the list on this page; they will automatically be replicated on other pages. Do NOT leave blank rows in between!
+      </div>
+
+      <div class="table-container">
+        <table id="table-backlog">
+          <thead>
+            <tr>
+              <th>Story #</th>
+              <th>Epic / Module</th>
+              <th>User Story Title</th>
+              <th>User Story Description</th>
+              <th>Acceptance Criteria</th>
+              <th>Priority</th>
+              <th>Release / Sprint</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="backlogBody">
+            <tr data-status="Completed"><td class="font-mono">US-001</td><td>User Authentication</td><td><strong>Customer Registration & Social Login</strong></td><td>As a sports shopper, I want to sign up using email or Google/Apple ID, so that I can quickly access saved profile.</td><td>Given valid credentials, When submitted, Then account created with instant token.</td><td><span class="badge badge-must">Must Have</span></td><td>Release 1 - Sprint 1</td><td><span class="badge badge-completed">Completed</span></td></tr>
+            <tr data-status="Completed"><td class="font-mono">US-002</td><td>Product Catalog</td><td><strong>Multi-Category Athletic Gear Catalog</strong></td><td>As a customer, I want to browse products categorized by sport (Soccer, Basketball, Running).</td><td>Given category selection, When clicked, Then paginated product grid renders with stock badge.</td><td><span class="badge badge-must">Must Have</span></td><td>Release 1 - Sprint 1</td><td><span class="badge badge-completed">Completed</span></td></tr>
+            <tr data-status="Completed"><td class="font-mono">US-003</td><td>Product Search</td><td><strong>Dynamic Search with Auto-Complete</strong></td><td>As a shopper, I want real-time search suggestions with brand filtering, so that I find items in seconds.</td><td>Given >=3 chars typed, When debounced 300ms, Then top 5 items display in dropdown.</td><td><span class="badge badge-must">Must Have</span></td><td>Release 1 - Sprint 1</td><td><span class="badge badge-completed">Completed</span></td></tr>
+            <tr data-status="Completed"><td class="font-mono">US-004</td><td>Product Detail</td><td><strong>Interactive Product Details & Size Guide</strong></td><td>As an athlete, I want high-res zoomable images, size charts, and gear specifications.</td><td>Given product page, When size button clicked, Then stock updates dynamically with size modal.</td><td><span class="badge badge-must">Must Have</span></td><td>Release 1 - Sprint 1</td><td><span class="badge badge-completed">Completed</span></td></tr>
+            <tr data-status="Completed"><td class="font-mono">US-005</td><td>Shopping Cart</td><td><strong>Real-Time Cart & Stock Reservation</strong></td><td>As a shopper, I want to add items to cart with temporary 15-minute stock hold.</td><td>Given stock available, When added to cart, Then mini-cart updates count and subtotal real-time.</td><td><span class="badge badge-must">Must Have</span></td><td>Release 1 - Sprint 1</td><td><span class="badge badge-completed">Completed</span></td></tr>
+            <tr data-status="In Progress"><td class="font-mono">US-006</td><td>Checkout</td><td><strong>Multi-Step Checkout with Address Validation</strong></td><td>As a buyer, I want frictionless 3-step checkout with address autocompletion.</td><td>Given valid shipping address, When verified via USPS API, Then shipping options calculate accurately.</td><td><span class="badge badge-must">Must Have</span></td><td>Release 1 - Sprint 2</td><td><span class="badge badge-progress">In Progress</span></td></tr>
+            <tr data-status="In Progress"><td class="font-mono">US-007</td><td>Payment Gateway</td><td><strong>Stripe, PayPal & Apple Pay Integration</strong></td><td>As a customer, I want to pay securely via card, PayPal, or wallet under PCI compliance.</td><td>Given 3D secure payment token, When processed, Then payment confirms in <3s with receipt ID.</td><td><span class="badge badge-must">Must Have</span></td><td>Release 1 - Sprint 2</td><td><span class="badge badge-progress">In Progress</span></td></tr>
+            <tr data-status="In Progress"><td class="font-mono">US-008</td><td>Notifications</td><td><strong>Automated Order Confirmation & PDF Invoice</strong></td><td>As a customer, I want immediate email/SMS confirmation with PDF receipt attachment.</td><td>Given payment webhook, When triggered, Then formatted confirmation email sends in <15s.</td><td><span class="badge badge-must">Must Have</span></td><td>Release 1 - Sprint 2</td><td><span class="badge badge-progress">In Progress</span></td></tr>
+            <tr data-status="Ready"><td class="font-mono">US-009</td><td>Order Tracking</td><td><strong>Customer Order History & Live GPS Tracking</strong></td><td>As a customer, I want to track my order shipment status via courier tracking API.</td><td>Given order ID, When queried, Then visual milestone progress bar renders.</td><td><span class="badge badge-should">Should Have</span></td><td>Release 1 - Sprint 2</td><td><span class="badge badge-ready">Ready</span></td></tr>
+            <tr data-status="Ready"><td class="font-mono">US-010</td><td>Customization</td><td><strong>Team Uniform & Jersey Customizer</strong></td><td>As a coach, I want to customize jerseys with player names, numbers, and logos.</td><td>Given jersey template, When name/number typed, Then live 3D preview displays typography.</td><td><span class="badge badge-should">Should Have</span></td><td>Release 1 - Sprint 2</td><td><span class="badge badge-ready">Ready</span></td></tr>
+            <tr data-status="Planned"><td class="font-mono">US-011</td><td>Inventory Sync</td><td><strong>Warehouse ERP Real-Time Stock Sync</strong></td><td>As inventory manager, I want automated stock sync with warehouse ERP.</td><td>Given stock change in ERP, When webhook received, storefront inventory reflects delta.</td><td><span class="badge badge-must">Must Have</span></td><td>Release 1 - Sprint 3</td><td><span class="badge badge-planned">Planned</span></td></tr>
+            <tr data-status="Planned"><td class="font-mono">US-012</td><td>Discounts & Promos</td><td><strong>Promo Engine & Bulk Tier Discounts</strong></td><td>As marketing manager, I want to create coupon codes and tiered discounts for schools/clubs.</td><td>Given valid promo code, When applied at checkout, Then cart total discounts accurately.</td><td><span class="badge badge-should">Should Have</span></td><td>Release 1 - Sprint 3</td><td><span class="badge badge-planned">Planned</span></td></tr>
+            <tr data-status="Planned"><td class="font-mono">US-013</td><td>Social & Reviews</td><td><strong>Customer Reviews, Photo Uploads & Q&A</strong></td><td>As a buyer, I want to read verified customer reviews and see user gear photos.</td><td>Given verified purchase, When review submitted, Then it appears after anti-spam check.</td><td><span class="badge badge-could">Could Have</span></td><td>Release 1 - Sprint 3</td><td><span class="badge badge-planned">Planned</span></td></tr>
+            <tr data-status="Planned"><td class="font-mono">US-014</td><td>Returns / RMA</td><td><strong>Self-Service Returns & RMA Portal</strong></td><td>As a customer, I want to initiate returns and generate prepaid shipping labels.</td><td>Given order in 30-day window, When return requested, return barcode label is generated.</td><td><span class="badge badge-should">Should Have</span></td><td>Release 1 - Sprint 3</td><td><span class="badge badge-planned">Planned</span></td></tr>
+            <tr data-status="Planned"><td class="font-mono">US-015</td><td>Admin Analytics</td><td><strong>Executive Operations & Sales Dashboard</strong></td><td>As executive, I want real-time KPI graphs for daily GMV, conversion rate, and inventory turn.</td><td>Given admin login, When loaded, Then charts display revenue and top sporting categories.</td><td><span class="badge badge-must">Must Have</span></td><td>Release 1 - Sprint 3</td><td><span class="badge badge-planned">Planned</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 3: Estimation -->
+    <div id="tab-estimation" class="tab-content">
+      <div class="content-header">
+        <div class="content-title">
+          <h2>Estimation Sheet</h2>
+          <p>Dev/QA hours and Fibonacci story points dynamically formula-linked to the Product Backlog.</p>
+        </div>
+      </div>
+
+      <div class="guideline-alert">
+        <strong>LMS Guideline Rule:</strong> Story # and Story Title are populated directly from the Product Backlog. If a row is inserted in product backlog, replicate in estimation.
+      </div>
+
+      <div class="table-container">
+        <table id="table-estimation">
+          <thead>
+            <tr>
+              <th>Story #</th>
+              <th>User Story Title</th>
+              <th>Dev (Hrs)</th>
+              <th>QA (Hrs)</th>
+              <th>Total (Hrs)</th>
+              <th>Story Points</th>
+              <th>Technique</th>
+              <th>Assigned Team</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono">US-001</td><td>Customer Registration & Social Login</td><td>24</td><td>12</td><td><strong>36</strong></td><td class="font-mono">5</td><td>Planning Poker</td><td>Vikram P. / Priya N.</td></tr>
+            <tr><td class="font-mono">US-002</td><td>Multi-Category Athletic Gear Catalog</td><td>32</td><td>16</td><td><strong>48</strong></td><td class="font-mono">8</td><td>Planning Poker</td><td>Sneha K. / Priya N.</td></tr>
+            <tr><td class="font-mono">US-003</td><td>Dynamic Search with Auto-Complete</td><td>28</td><td>14</td><td><strong>42</strong></td><td class="font-mono">5</td><td>Planning Poker</td><td>Amit V. / Priya N.</td></tr>
+            <tr><td class="font-mono">US-004</td><td>Interactive Product Details & Size Guide</td><td>24</td><td>12</td><td><strong>36</strong></td><td class="font-mono">5</td><td>Planning Poker</td><td>Sneha K. / Amit V.</td></tr>
+            <tr><td class="font-mono">US-005</td><td>Real-Time Cart & Stock Reservation</td><td>30</td><td>16</td><td><strong>46</strong></td><td class="font-mono">5</td><td>Planning Poker</td><td>Vikram P. / Priya N.</td></tr>
+            <tr><td class="font-mono">US-006</td><td>Multi-Step Checkout with Address Validation</td><td>40</td><td>20</td><td><strong>60</strong></td><td class="font-mono">8</td><td>Planning Poker</td><td>Amit V. / Sneha K.</td></tr>
+            <tr><td class="font-mono">US-007</td><td>Stripe, PayPal & Apple Pay Integration</td><td>48</td><td>24</td><td><strong>72</strong></td><td class="font-mono">13</td><td>Planning Poker</td><td>Vikram P. / Priya N.</td></tr>
+            <tr><td class="font-mono">US-008</td><td>Automated Order Confirmation & PDF Invoice</td><td>18</td><td>10</td><td><strong>28</strong></td><td class="font-mono">3</td><td>Planning Poker</td><td>Amit V. / Priya N.</td></tr>
+            <tr><td class="font-mono">US-009</td><td>Customer Order History & Live GPS Tracking</td><td>32</td><td>16</td><td><strong>48</strong></td><td class="font-mono">8</td><td>Planning Poker</td><td>Sneha K. / Amit V.</td></tr>
+            <tr><td class="font-mono">US-010</td><td>Team Uniform & Jersey Customizer</td><td>56</td><td>28</td><td><strong>84</strong></td><td class="font-mono">13</td><td>Planning Poker</td><td>Vikram P. / Sneha K.</td></tr>
+            <tr><td class="font-mono">US-011</td><td>Warehouse ERP Real-Time Stock Sync</td><td>44</td><td>22</td><td><strong>66</strong></td><td class="font-mono">8</td><td>Planning Poker</td><td>Amit V. / Rohan M.</td></tr>
+            <tr><td class="font-mono">US-012</td><td>Promo Engine & Bulk Tier Discounts</td><td>24</td><td>12</td><td><strong>36</strong></td><td class="font-mono">5</td><td>Planning Poker</td><td>Sneha K. / Amit V.</td></tr>
+            <tr><td class="font-mono">US-013</td><td>Customer Reviews, Photo Uploads & Q&A</td><td>20</td><td>10</td><td><strong>30</strong></td><td class="font-mono">3</td><td>Planning Poker</td><td>Sneha K. / Priya N.</td></tr>
+            <tr><td class="font-mono">US-014</td><td>Self-Service Returns & RMA Portal</td><td>36</td><td>18</td><td><strong>54</strong></td><td class="font-mono">8</td><td>Planning Poker</td><td>Amit V. / Priya N.</td></tr>
+            <tr><td class="font-mono">US-015</td><td>Executive Operations & Sales Dashboard</td><td>40</td><td>20</td><td><strong>60</strong></td><td class="font-mono">8</td><td>Planning Poker</td><td>Vikram P. / Rohan M.</td></tr>
+          </tbody>
+          <tfoot>
+            <tr style="background: rgba(56, 189, 248, 0.1); font-weight: 700;">
+              <td colspan="2">TOTAL WORKBOOK ESTIMATION</td>
+              <td>464 hrs</td>
+              <td>234 hrs</td>
+              <td style="color: var(--accent);">698 hrs</td>
+              <td class="font-mono" style="color: var(--accent); font-size: 1.1rem;">100 pts</td>
+              <td colspan="2">Fibonacci Scale Standard</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 4: Burndown -->
+    <div id="tab-burndown" class="tab-content">
+      <div class="content-header">
+        <div class="content-title">
+          <h2>Product & Release Burndown Chart</h2>
+          <p>Dynamic ideal vs. actual remaining points tracking across sprints.</p>
+        </div>
+      </div>
+
+      <div class="guideline-alert">
+        <strong>LMS Guideline Rule:</strong> Select release number ('All' for product burndown). Delete previous chart before generating a new one. No blank rows in data.
+      </div>
+
+      <div class="chart-container">
+        <h4 style="margin-bottom: 1rem; color: var(--text-main); font-family: 'Outfit';">
+          Burndown Progress: Release 1 (Blue Line: Ideal | Orange Bar: Actual Remaining)
+        </h4>
+        
+        <div class="burndown-bar-row">
+          <div class="burndown-label">Sprint 1 - Day 1 (01-Nov)</div>
+          <div class="burndown-bar-wrap">
+            <div class="burndown-bar-actual" style="width: 100%;"></div>
+            <div class="burndown-bar-ideal" style="left: 100%;"></div>
+          </div>
+          <div class="burndown-val">100 pts</div>
+        </div>
+
+        <div class="burndown-bar-row">
+          <div class="burndown-label">Sprint 1 - Day 5 (05-Nov)</div>
+          <div class="burndown-bar-wrap">
+            <div class="burndown-bar-actual" style="width: 87%;"></div>
+            <div class="burndown-bar-ideal" style="left: 86%;"></div>
+          </div>
+          <div class="burndown-val">87 pts</div>
+        </div>
+
+        <div class="burndown-bar-row">
+          <div class="burndown-label">Sprint 1 - End (10-Nov)</div>
+          <div class="burndown-bar-wrap">
+            <div class="burndown-bar-actual" style="width: 72%;"></div>
+            <div class="burndown-bar-ideal" style="left: 72%;"></div>
+          </div>
+          <div class="burndown-val">72 pts</div>
+        </div>
+
+        <div class="burndown-bar-row">
+          <div class="burndown-label">Sprint 2 - Day 5 (15-Nov)</div>
+          <div class="burndown-bar-wrap">
+            <div class="burndown-bar-actual" style="width: 62%;"></div>
+            <div class="burndown-bar-ideal" style="left: 58%;"></div>
+          </div>
+          <div class="burndown-val" style="color: var(--warning);">62 pts *</div>
+        </div>
+
+        <div class="burndown-bar-row">
+          <div class="burndown-label">Sprint 2 - Est (20-Nov)</div>
+          <div class="burndown-bar-wrap">
+            <div class="burndown-bar-actual" style="width: 44%; opacity: 0.6;"></div>
+            <div class="burndown-bar-ideal" style="left: 44%;"></div>
+          </div>
+          <div class="burndown-val">44 pts</div>
+        </div>
+
+        <div class="burndown-bar-row">
+          <div class="burndown-label">Sprint 3 - End (30-Nov)</div>
+          <div class="burndown-bar-wrap">
+            <div class="burndown-bar-actual" style="width: 0%;"></div>
+            <div class="burndown-bar-ideal" style="left: 0%;"></div>
+          </div>
+          <div class="burndown-val" style="color: var(--success);">0 pts</div>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.75rem;">* Current Active Sprint Date. Sprint 1 completed 28 story points on time.</p>
+      </div>
+
+      <div class="table-container">
+        <table id="table-burndown">
+          <thead>
+            <tr>
+              <th>Sprint / Day</th>
+              <th>Date</th>
+              <th>Sprint Goal</th>
+              <th>Ideal Pts</th>
+              <th>Actual Pts</th>
+              <th>Completed</th>
+              <th>Notes / Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Sprint 1 - Day 1</td><td class="font-mono">01-Nov-26</td><td>Sprint 1: Auth, Catalog & Cart Baseline</td><td>100</td><td>100</td><td>0</td><td>Sprint 1 kick-off, team onboarded</td></tr>
+            <tr><td>Sprint 1 - Day 5</td><td class="font-mono">05-Nov-26</td><td>Sprint 1: Auth, Catalog & Cart Baseline</td><td>86</td><td>87</td><td>8</td><td>US-002 Catalog filtering completed</td></tr>
+            <tr><td>Sprint 1 - Day 10</td><td class="font-mono">10-Nov-26</td><td>Sprint 1: Auth, Catalog & Cart Baseline</td><td>72</td><td>72</td><td>10</td><td>Sprint 1 completed on time (28 pts achieved)</td></tr>
+            <tr><td>Sprint 2 - Day 1</td><td class="font-mono">11-Nov-26</td><td>Sprint 2: Checkout, Payments & Customizer</td><td>72</td><td>72</td><td>0</td><td>Sprint 2 kick-off; 34 pts planned</td></tr>
+            <tr><td>Sprint 2 - Day 5</td><td class="font-mono">15-Nov-26</td><td>Sprint 2: Checkout, Payments & Customizer</td><td>58</td><td style="color: var(--warning); font-weight: 700;">62</td><td>6</td><td>Current Date; Payment gateway sandbox active</td></tr>
+            <tr><td>Sprint 2 - Day 10</td><td class="font-mono">20-Nov-26</td><td>Sprint 2: Checkout, Payments & Customizer</td><td>44</td><td>44</td><td>7</td><td>Target Sprint 2 completion</td></tr>
+            <tr><td>Sprint 3 - Day 10</td><td class="font-mono">30-Nov-26</td><td>Sprint 3: Release 1 Final Sign-off</td><td>0</td><td>0</td><td>22</td><td>Final Release 1 production launch</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 5: Resource Plan -->
+    <div id="tab-resources" class="tab-content">
+      <div class="content-header">
+        <div class="content-title">
+          <h2>Resource Plan & Staffing Loading</h2>
+          <p>Roles, responsibilities, contact directory, and weekly loading hours.</p>
+        </div>
+      </div>
+
+      <div class="guideline-alert">
+        <strong>LMS Guideline Rule:</strong> Captures role, responsibilities, contact information, and planned vs. actual loading hours across weeks.
+      </div>
+
+      <div class="table-container">
+        <table id="table-resources">
+          <thead>
+            <tr>
+              <th>Member Name</th>
+              <th>Project Role</th>
+              <th>Responsibilities</th>
+              <th>Contact Info</th>
+              <th>Location</th>
+              <th>W1 (Plan/Act)</th>
+              <th>W2 (Plan/Act)</th>
+              <th>W3 (Plan/Act)</th>
+              <th>W4 (Plan/Act)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Vikram Prajapati</strong></td>
+              <td>Lead Full Stack Architect</td>
+              <td>Overall architecture, secure microservices, payment integration, tech reviews</td>
+              <td class="font-mono">vikram.prajapati@epicsports.com</td>
+              <td>Bangalore, IN</td>
+              <td>40 / 42</td><td>40 / 41</td><td>40 / 39</td><td>40 / 40</td>
+            </tr>
+            <tr>
+              <td><strong>Sneha Kulkarni</strong></td>
+              <td>Senior Frontend Engineer</td>
+              <td>React/Next.js storefront, dynamic catalog UI, responsive design, state management</td>
+              <td class="font-mono">sneha.kulkarni@epicsports.com</td>
+              <td>Pune, IN</td>
+              <td>40 / 40</td><td>40 / 42</td><td>40 / 40</td><td>40 / 40</td>
+            </tr>
+            <tr>
+              <td><strong>Amit Verma</strong></td>
+              <td>Backend Developer</td>
+              <td>Node.js REST/GraphQL APIs, database schema, ERP inventory sync, promo engine</td>
+              <td class="font-mono">amit.verma@epicsports.com</td>
+              <td>Noida, IN</td>
+              <td>40 / 38</td><td>40 / 40</td><td>40 / 41</td><td>40 / 40</td>
+            </tr>
+            <tr>
+              <td><strong>Priya Nair</strong></td>
+              <td>QA Automation Lead</td>
+              <td>Cypress/Selenium test automation, API testing, regression suites, defect triage</td>
+              <td class="font-mono">priya.nair@epicsports.com</td>
+              <td>Chennai, IN</td>
+              <td>40 / 40</td><td>40 / 39</td><td>40 / 42</td><td>40 / 40</td>
+            </tr>
+            <tr>
+              <td><strong>Rohan Mehta</strong></td>
+              <td>DevOps & Cloud Engineer</td>
+              <td>AWS ECS/EKS infrastructure, Terraform, CI/CD GitHub Actions, CloudWatch monitoring</td>
+              <td class="font-mono">rohan.mehta@epicsports.com</td>
+              <td>Hyderabad, IN</td>
+              <td>40 / 42</td><td>40 / 40</td><td>40 / 40</td><td>40 / 40</td>
+            </tr>
+            <tr>
+              <td><strong>Ananya Roy</strong></td>
+              <td>Scrum Master</td>
+              <td>Agile ceremonies facilitation, impediments removal, burndown tracking, team velocity</td>
+              <td class="font-mono">ananya.roy@epicsports.com</td>
+              <td>Kolkata, IN</td>
+              <td>40 / 40</td><td>40 / 40</td><td>40 / 40</td><td>40 / 40</td>
+            </tr>
+            <tr>
+              <td><strong>David Miller</strong></td>
+              <td>Product Owner</td>
+              <td>Product vision, backlog prioritization, user story acceptance criteria, business sign-off</td>
+              <td class="font-mono">david.miller@epicsports.com</td>
+              <td>Chicago, USA</td>
+              <td>20 / 22</td><td>20 / 20</td><td>20 / 21</td><td>20 / 20</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 6: IT Services Plan -->
+    <div id="tab-it" class="tab-content">
+      <div class="content-header">
+        <div class="content-title">
+          <h2>IT Services & Infrastructure Plan</h2>
+          <p>Cloud hosting, CI/CD automation, and secure payment sandbox tracking.</p>
+        </div>
+      </div>
+
+      <div class="guideline-alert">
+        <strong>LMS Guideline Rule:</strong> Include all IT services requirements in this sheet for tracking across environments.
+      </div>
+
+      <div class="table-container">
+        <table id="table-it">
+          <thead>
+            <tr>
+              <th>Service #</th>
+              <th>Category</th>
+              <th>Requirement Description</th>
+              <th>Target Specification</th>
+              <th>Environment</th>
+              <th>Target Date</th>
+              <th>Owner</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono">IT-01</td><td>Cloud Infrastructure</td><td>Scalable container cluster for frontend and backend microservices</td><td>AWS ECS Fargate (4 vCPU, 16GB RAM)</td><td>Dev, QA, Prod</td><td class="font-mono">02-Nov-26</td><td>Rohan Mehta</td><td><span class="badge badge-completed">Provisioned</span></td></tr>
+            <tr><td class="font-mono">IT-02</td><td>Database & Caching</td><td>Managed relational DB with Redis high-throughput caching cluster</td><td>AWS Aurora PostgreSQL 15 + ElastiCache</td><td>Dev, QA, Prod</td><td class="font-mono">03-Nov-26</td><td>Amit Verma</td><td><span class="badge badge-completed">Provisioned</span></td></tr>
+            <tr><td class="font-mono">IT-03</td><td>CI/CD Automation</td><td>Automated build, lint, test, and container deployment pipelines</td><td>GitHub Actions Enterprise + Docker</td><td>All Envs</td><td class="font-mono">04-Nov-26</td><td>Rohan Mehta</td><td><span class="badge badge-completed">Provisioned</span></td></tr>
+            <tr><td class="font-mono">IT-04</td><td>Security & SSL</td><td>SSL/TLS Wildcard certificates, Cloudflare WAF, and DDoS defense</td><td>Cloudflare Business + AWS ACM SSL</td><td>Staging, Prod</td><td class="font-mono">08-Nov-26</td><td>Vikram Prajapati</td><td><span class="badge badge-completed">Configured</span></td></tr>
+            <tr><td class="font-mono">IT-05</td><td>Payment Sandbox</td><td>PCI-DSS certified developer sandbox for payment testing</td><td>Stripe Connect + PayPal Sandbox</td><td>Dev, QA</td><td class="font-mono">09-Nov-26</td><td>Vikram Prajapati</td><td><span class="badge badge-completed">Configured</span></td></tr>
+            <tr><td class="font-mono">IT-06</td><td>ERP Gateway</td><td>Secure VPN tunnel linking AWS VPC to warehouse ERP</td><td>AWS Site-to-Site IPsec VPN</td><td>QA, Prod</td><td class="font-mono">18-Nov-26</td><td>Rohan Mehta</td><td><span class="badge badge-progress">In Progress</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 7: Training Plan -->
+    <div id="tab-training" class="tab-content">
+      <div class="content-header">
+        <div class="content-title">
+          <h2>Project Training Plan</h2>
+          <p>Training requirements, methodology, target schedule, and status.</p>
+        </div>
+      </div>
+
+      <div class="guideline-alert">
+        <strong>LMS Guideline Rule:</strong> Captures training requirements, Type of training, Training methodology, and tracking using Status column.
+      </div>
+
+      <div class="table-container">
+        <table id="table-training">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Topic / Skill Area</th>
+              <th>Target Audience</th>
+              <th>Type of Training</th>
+              <th>Training Methodology</th>
+              <th>Date</th>
+              <th>Trainer / Platform</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono">TRN-01</td><td>PCI-DSS Compliance & Secure Payment Tokenization</td><td>Backend Devs & QA Lead</td><td>Technical / Security</td><td>Instructor-Led Workshop</td><td class="font-mono">04-Nov-26</td><td>CyberSec Consultant</td><td><span class="badge badge-completed">Completed</span></td></tr>
+            <tr><td class="font-mono">TRN-02</td><td>Next.js 14 App Router & SSR Performance</td><td>Frontend Developers</td><td>Technical</td><td>E-Learning & Lab</td><td class="font-mono">06-Nov-26</td><td>Vercel Enterprise</td><td><span class="badge badge-completed">Completed</span></td></tr>
+            <tr><td class="font-mono">TRN-03</td><td>Agile Scrum Ceremonies & Story Estimation</td><td>Entire Project Team</td><td>Agile / Process</td><td>Interactive Workshop</td><td class="font-mono">02-Nov-26</td><td>Ananya Roy (SM)</td><td><span class="badge badge-completed">Completed</span></td></tr>
+            <tr><td class="font-mono">TRN-04</td><td>Cypress End-to-End Test Automation Patterns</td><td>QA & Developers</td><td>Technical / QA</td><td>Peer Mentoring</td><td class="font-mono">14-Nov-26</td><td>Priya Nair (QA Lead)</td><td><span class="badge badge-completed">Completed</span></td></tr>
+            <tr><td class="font-mono">TRN-05</td><td>Warehouse ERP API Integration & Event Streaming</td><td>Backend & DevOps Leads</td><td>Domain / Technical</td><td>Vendor-Led Training</td><td class="font-mono">20-Nov-26</td><td>Epic Sports ERP Vendor</td><td><span class="badge badge-progress">In Progress</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 8: Risk Management + Battle Map -->
+    <div id="tab-risks" class="tab-content">
+      <div class="content-header">
+        <div class="content-title">
+          <h2>Risk Management Register & Battle Map</h2>
+          <p>Risk impact, cost of risk, mitigation plan, cost-benefit ratio, and escalation threshold.</p>
+        </div>
+      </div>
+
+      <div class="guideline-alert">
+        <strong>LMS Guideline Rule:</strong> Shaded rows indicate Open risks. <strong>Tan coloured rows</strong> indicate risks past the identified Escalation Threshold (&ge; 15). Cost Benefit Ratio = Cost of Risk / Cost of Mitigation.
+      </div>
+
+      <div class="table-container" style="margin-bottom: 2rem;">
+        <table id="table-risks">
+          <thead>
+            <tr>
+              <th>Risk ID</th>
+              <th>Risk Title</th>
+              <th>Source</th>
+              <th>Phase</th>
+              <th>Prob (1-5)</th>
+              <th>Impact (1-5)</th>
+              <th>Exposure</th>
+              <th>Cost of Risk</th>
+              <th>Mitigation Cost</th>
+              <th>CBR</th>
+              <th>Update Date</th>
+              <th>Status</th>
+              <th>Escalation Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="risk-tan">
+              <td class="font-mono">RSK-01</td>
+              <td><strong>Third-Party Payment Gateway Sandbox Delays</strong></td>
+              <td>Vendor / Eng</td>
+              <td>Sprint 1</td>
+              <td>4</td><td>4</td>
+              <td><strong>16</strong></td>
+              <td>$18,000</td><td>$3,500</td>
+              <td>5.14</td>
+              <td class="font-mono">15-Nov-26</td>
+              <td><span class="badge badge-tan">Open - Escalated</span></td>
+              <td>Escalated to Sponsor; parallel Stripe + PayPal sandbox setup</td>
+            </tr>
+            <tr>
+              <td class="font-mono">RSK-02</td>
+              <td>Holiday Peak Load Concurrency Spike</td>
+              <td>Infrastructure</td>
+              <td>Sprint 1</td>
+              <td>3</td><td>3</td>
+              <td><strong>9</strong></td>
+              <td>$12,000</td><td>$2,500</td>
+              <td>4.80</td>
+              <td class="font-mono">12-Nov-26</td>
+              <td><span class="badge badge-progress">Open</span></td>
+              <td>AWS autoscaling policies & Redis caching applied</td>
+            </tr>
+            <tr class="risk-tan">
+              <td class="font-mono">RSK-03</td>
+              <td><strong>Custom Team Jersey 3D Canvas Rendering Overhead</strong></td>
+              <td>Engineering / UX</td>
+              <td>Sprint 2</td>
+              <td>4</td><td>4</td>
+              <td><strong>16</strong></td>
+              <td>$20,000</td><td>$4,000</td>
+              <td>5.00</td>
+              <td class="font-mono">15-Nov-26</td>
+              <td><span class="badge badge-tan">Open - Escalated</span></td>
+              <td>Escalated to Tech Lead; WebGL hardware acceleration fallback</td>
+            </tr>
+            <tr>
+              <td class="font-mono">RSK-04</td>
+              <td>Warehouse ERP Real-time Inventory Feed Latency</td>
+              <td>External Partner</td>
+              <td>Sprint 2</td>
+              <td>3</td><td>4</td>
+              <td><strong>12</strong></td>
+              <td>$15,000</td><td>$3,000</td>
+              <td>5.00</td>
+              <td class="font-mono">14-Nov-26</td>
+              <td><span class="badge badge-progress">Open</span></td>
+              <td>Implemented async RabbitMQ message buffer with queue alerts</td>
+            </tr>
+            <tr style="background: rgba(16, 185, 129, 0.06);">
+              <td class="font-mono">RSK-05</td>
+              <td>Non-Compliance with PCI-DSS Tokenization Standard</td>
+              <td>Security</td>
+              <td>Inception</td>
+              <td>2</td><td>5</td>
+              <td><strong>10</strong></td>
+              <td>$25,000</td><td>$5,000</td>
+              <td>5.00</td>
+              <td class="font-mono">08-Nov-26</td>
+              <td><span class="badge badge-completed">Closed</span></td>
+              <td>Achieved full tokenization via Stripe Elements; signed off</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 5x5 Battle Map Matrix as required by Guideline 4 -->
+      <h3 style="margin-bottom: 0.5rem; font-family: 'Outfit';">Risk Management Battle Map Chart (5x5 Matrix)</h3>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Visual risk battle map mapping probability vs. impact with Tan escalation callouts.</p>
+
+      <div class="battle-map-grid">
+        <div class="matrix-header">Prob \ Impact</div>
+        <div class="matrix-header">1 - Negligible</div>
+        <div class="matrix-header">2 - Minor</div>
+        <div class="matrix-header">3 - Moderate</div>
+        <div class="matrix-header">4 - Major</div>
+        <div class="matrix-header">5 - Critical</div>
+
+        <div class="matrix-header">5 - Very High</div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell cell-green">RSK-05<br>(Closed)</div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell"></div>
+
+        <div class="matrix-header">4 - High</div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell cell-tan">RSK-01, RSK-03<br>[TAN ESCALATED]</div>
+        <div class="matrix-cell"></div>
+
+        <div class="matrix-header">3 - Medium</div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell cell-blue">RSK-02<br>(Open)</div>
+        <div class="matrix-cell cell-blue">RSK-04<br>(Open)</div>
+        <div class="matrix-cell"></div>
+
+        <div class="matrix-header">2 - Low</div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell"></div>
+
+        <div class="matrix-header">1 - Rare</div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell"></div>
+        <div class="matrix-cell"></div>
+      </div>
+    </div>
+
+    <!-- TAB 9: Opportunity Management -->
+    <div id="tab-opps" class="tab-content">
+      <div class="content-header">
+        <div class="content-title">
+          <h2>Opportunity Management Register</h2>
+          <p>Net opportunity value calculation and strategic response plans.</p>
+        </div>
+      </div>
+
+      <div class="guideline-alert">
+        <strong>LMS Guideline Rule:</strong> Opportunity Value = Cost of Expected Benefits &minus; Cost of Implementation. Response Strategies: <em>Accept & Exploit</em>, <em>Accept & Co leverage</em>, <em>Accept & Transfer</em>, <em>Accept & Hold</em>, or <em>Drop</em>.
+      </div>
+
+      <div class="table-container">
+        <table id="table-opps">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Opportunity Title</th>
+              <th>Source</th>
+              <th>Category</th>
+              <th>Expected Benefit</th>
+              <th>Implementation Cost</th>
+              <th>Opportunity Value</th>
+              <th>Priority</th>
+              <th>Response Strategy</th>
+              <th>Action Plan & Owner</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono">OPP-01</td><td><strong>AI Gear Recommendation & Size Predictor</strong></td><td>Technology</td><td>Customer Experience</td><td>$55,000</td><td>$14,000</td><td class="font-mono" style="color: #10b981; font-weight: 700;">+$41,000</td><td><span class="badge badge-must">Hot Pursuit</span></td><td><span class="badge strat-exploit">Accept & Exploit</span></td><td>Build in-house machine learning fit model; Sneha & Vikram</td><td><span class="badge badge-completed">Active</span></td></tr>
+            <tr><td class="font-mono">OPP-02</td><td><strong>Youth Sports League Bulk Partnership Portal</strong></td><td>Business Dev</td><td>Revenue Expansion</td><td>$65,000</td><td>$16,000</td><td class="font-mono" style="color: #10b981; font-weight: 700;">+$49,000</td><td><span class="badge badge-must">Hot Pursuit</span></td><td><span class="badge strat-co-leverage">Accept & Co leverage</span></td><td>Partner with National Youth Sports Alliance; David Miller</td><td><span class="badge badge-completed">Active</span></td></tr>
+            <tr><td class="font-mono">OPP-03</td><td><strong>24/7 Multilingual Live Customer Support</strong></td><td>Operations</td><td>Cost Optimization</td><td>$22,000</td><td>$8,000</td><td class="font-mono" style="color: #38bdf8; font-weight: 700;">+$14,000</td><td><span class="badge badge-should">Medium</span></td><td><span class="badge strat-transfer">Accept & Transfer</span></td><td>Transfer level-1 support to Zendesk partner; Rajesh Sharma</td><td><span class="badge badge-progress">Under Review</span></td></tr>
+            <tr><td class="font-mono">OPP-04</td><td><strong>Cryptocurrency & Web3 Payment Checkout</strong></td><td>Market Trend</td><td>Payment Channel</td><td>$6,000</td><td>$9,000</td><td class="font-mono" style="color: #ef4444; font-weight: 700;">-$3,000</td><td><span class="badge badge-could">Low</span></td><td><span class="badge strat-drop">Drop</span></td><td>Drop opportunity due to negative net value & volatility</td><td><span class="badge badge-planned">Dropped</span></td></tr>
+            <tr><td class="font-mono">OPP-05</td><td><strong>Automated Cross-Border International Shipping</strong></td><td>Expansion</td><td>Global Logistics</td><td>$42,000</td><td>$18,000</td><td class="font-mono" style="color: #38bdf8; font-weight: 700;">+$24,000</td><td><span class="badge badge-must">High</span></td><td><span class="badge strat-hold">Accept & Hold</span></td><td>Hold until Q2 due to international tax clearance</td><td><span class="badge badge-ready">On Hold</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 10: Defects Data -->
+    <div id="tab-defects" class="tab-content">
+      <div class="content-header">
+        <div class="content-title">
+          <h2>Verification Data (Defects & Review Comments)</h2>
+          <p>Review comments and QA defects categorized by verified Work Product.</p>
+        </div>
+      </div>
+
+      <div class="guideline-alert">
+        <strong>LMS Guideline Rule:</strong> "Type" field indicates method of verification (Review vs. Testing). "Work Product" field tracks the name of the document/code verified.
+      </div>
+
+      <div class="table-container">
+        <table id="table-defects">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Type</th>
+              <th>Work Product</th>
+              <th>Description / Observation</th>
+              <th>Severity</th>
+              <th>Logged By</th>
+              <th>Date</th>
+              <th>Owner</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono">DEF-001</td><td><strong>Review</strong></td><td>US-001 Auth Controller Code</td><td>JWT refresh token expiration set to 30 days without revocation check</td><td><span class="badge badge-must">Major</span></td><td>Vikram Prajapati</td><td class="font-mono">03-Nov-26</td><td>Amit Verma</td><td><span class="badge badge-completed">Verified & Closed</span></td></tr>
+            <tr><td class="font-mono">DEF-002</td><td><strong>Testing</strong></td><td>US-002 Catalog Filter Component</td><td>Selecting soccer boots with size 11 threw null pointer in price formatter</td><td><span class="badge badge-could">Minor</span></td><td>Priya Nair</td><td class="font-mono">04-Nov-26</td><td>Sneha Kulkarni</td><td><span class="badge badge-completed">Verified & Closed</span></td></tr>
+            <tr><td class="font-mono">DEF-003</td><td><strong>Testing</strong></td><td>US-005 Mini-Cart Component</td><td>Subtotal calculation fails to apply regional sales tax until refresh</td><td><span class="badge badge-must">Major</span></td><td>Priya Nair</td><td class="font-mono">08-Nov-26</td><td>Sneha Kulkarni</td><td><span class="badge badge-completed">Verified & Closed</span></td></tr>
+            <tr><td class="font-mono">DEF-004</td><td><strong>Review</strong></td><td>Checkout Flow UX Wireframes</td><td>Missing guest checkout path; mandatory login required which increases friction</td><td><span class="badge badge-must">Major</span></td><td>David Miller</td><td class="font-mono">10-Nov-26</td><td>Sneha Kulkarni</td><td><span class="badge badge-completed">Verified & Closed</span></td></tr>
+            <tr><td class="font-mono">DEF-005</td><td><strong>Testing</strong></td><td>US-006 Address Auto-complete</td><td>ZIP code 5-digit regex rejected 9-digit ZIP+4 formatted addresses</td><td><span class="badge badge-could">Minor</span></td><td>Priya Nair</td><td class="font-mono">13-Nov-26</td><td>Amit Verma</td><td><span class="badge badge-progress">In Progress</span></td></tr>
+            <tr><td class="font-mono">DEF-006</td><td><strong>Review</strong></td><td>Payment Webhook Handler</td><td>Webhook retry handler lacks idempotency key check; risk of double charging</td><td><span class="badge badge-must" style="background:#dc2626; color:white;">Critical</span></td><td>Vikram Prajapati</td><td class="font-mono">14-Nov-26</td><td>Amit Verma</td><td><span class="badge badge-progress">In Progress</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 11: Impediments Log -->
+    <div id="tab-impediments" class="tab-content">
+      <div class="content-header">
+        <div class="content-title">
+          <h2>Impediments Log</h2>
+          <p>Operational blockers, sprint impact, resolution plans, and ownership.</p>
+        </div>
+      </div>
+
+      <div class="guideline-alert">
+        <strong>LMS Guideline Rule:</strong> Captures all impediment details impacting project team velocity with structured action plans.
+      </div>
+
+      <div class="table-container">
+        <table id="table-impediments">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Description of Impediment</th>
+              <th>Raised By</th>
+              <th>Date Raised</th>
+              <th>Impact on Sprint</th>
+              <th>Assigned Owner</th>
+              <th>Resolution Action Plan</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono">IMP-01</td><td>Delays in receiving production-like sports catalog product photos and specs</td><td>Sneha Kulkarni</td><td class="font-mono">02-Nov-26</td><td>High - delayed catalog cards</td><td>David Miller (PO)</td><td>PO provided cloud asset bucket with 500 validated product SKUs</td><td><span class="badge badge-completed">Resolved</span></td></tr>
+            <tr><td class="font-mono">IMP-02</td><td>Developer laptop firewall blocking Docker container local mesh networking</td><td>Amit Verma</td><td class="font-mono">04-Nov-26</td><td>Medium - dev environment setup</td><td>Rohan Mehta</td><td>Created IT ticket; pushed updated corporate security group policy</td><td><span class="badge badge-completed">Resolved</span></td></tr>
+            <tr><td class="font-mono">IMP-03</td><td>Stripe sandbox developer account approval pending corporate tax ID verification</td><td>Vikram Prajapati</td><td class="font-mono">12-Nov-26</td><td>High - blocking US-007 tests</td><td>Ananya Roy (SM)</td><td>Followed up with corporate finance; temporary testing key provided</td><td><span class="badge badge-progress">In Progress</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 12: Action Items -->
+    <div id="tab-actions" class="tab-content">
+      <div class="content-header">
+        <div class="content-title">
+          <h2>Action Items Register</h2>
+          <p>Decisions and follow-up tasks originating from Scrum ceremonies.</p>
+        </div>
+      </div>
+
+      <div class="guideline-alert">
+        <strong>LMS Guideline Rule:</strong> Captures the action items for the project across meetings with target completion dates.
+      </div>
+
+      <div class="table-container">
+        <table id="table-actions">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Action Item Description</th>
+              <th>Meeting Origin</th>
+              <th>Owner</th>
+              <th>Target Date</th>
+              <th>Status</th>
+              <th>Outcome / Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono">ACT-01</td><td>Configure automated nightly regression tests on staging environment</td><td>Sprint 1 Retrospective</td><td>Priya Nair</td><td class="font-mono">08-Nov-26</td><td><span class="badge badge-completed">Completed</span></td><td>GitHub Actions cron configured; results piped to Slack #qa-reports</td></tr>
+            <tr><td class="font-mono">ACT-02</td><td>Refine user stories for custom team uniform configurator (US-010)</td><td>Backlog Refinement</td><td>David Miller & Vikram</td><td class="font-mono">10-Nov-26</td><td><span class="badge badge-completed">Completed</span></td><td>Added 5 concrete acceptance criteria and Canvas specs</td></tr>
+            <tr><td class="font-mono">ACT-03</td><td>Obtain client security sign-off for PCI-DSS tokenized checkout</td><td>Daily Scrum</td><td>Ananya Roy</td><td class="font-mono">16-Nov-26</td><td><span class="badge badge-progress">In Progress</span></td><td>Security team audit scheduled for Nov 16 at 2 PM EST</td></tr>
+            <tr><td class="font-mono">ACT-04</td><td>Benchmark Redis cart caching performance with 5,000 simulated users</td><td>Architecture Review</td><td>Amit Verma & Rohan</td><td class="font-mono">19-Nov-26</td><td><span class="badge badge-progress">In Progress</span></td><td>K6 load testing script written; execution planned</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 13: Story Clarity Index -->
+    <div id="tab-sci" class="tab-content">
+      <div class="content-header">
+        <div class="content-title">
+          <h2>Story Clarity Index (SCI) Calculator</h2>
+          <p>Live interactive calculator evaluating stories against 6 weighted criteria.</p>
+        </div>
+      </div>
+
+      <div class="guideline-alert">
+        <strong>LMS Guideline Rule:</strong> Story Clarity Index calculator is used to calculate clarity level of stories. Score &ge; 85: High Clarity (Ready); 70&ndash;84: Medium; &lt;70: Low.
+      </div>
+
+      <div class="table-container">
+        <table id="table-sci">
+          <thead>
+            <tr>
+              <th>Story #</th>
+              <th>User Story Title</th>
+              <th>Persona (15)</th>
+              <th>Value (20)</th>
+              <th>AC (25)</th>
+              <th>Tech (15)</th>
+              <th>Sizing (15)</th>
+              <th>NFR (10)</th>
+              <th>SCI Score</th>
+              <th>Clarity Level</th>
+              <th>Readiness</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="font-mono">US-001</td><td>Customer Registration & Social Login</td><td>15</td><td>20</td><td>25</td><td>15</td><td>15</td><td>10</td><td class="font-mono" style="color: #10b981; font-weight:700;">100%</td><td><span class="badge badge-completed">High Clarity</span></td><td>Ready for Sprint</td></tr>
+            <tr><td class="font-mono">US-002</td><td>Multi-Category Athletic Gear Catalog</td><td>15</td><td>20</td><td>25</td><td>15</td><td>15</td><td>8</td><td class="font-mono" style="color: #10b981; font-weight:700;">98%</td><td><span class="badge badge-completed">High Clarity</span></td><td>Ready for Sprint</td></tr>
+            <tr><td class="font-mono">US-003</td><td>Dynamic Search with Auto-Complete</td><td>15</td><td>20</td><td>25</td><td>14</td><td>15</td><td>9</td><td class="font-mono" style="color: #10b981; font-weight:700;">98%</td><td><span class="badge badge-completed">High Clarity</span></td><td>Ready for Sprint</td></tr>
+            <tr><td class="font-mono">US-004</td><td>Interactive Product Details & Size Guide</td><td>15</td><td>20</td><td>23</td><td>14</td><td>15</td><td>8</td><td class="font-mono" style="color: #10b981; font-weight:700;">95%</td><td><span class="badge badge-completed">High Clarity</span></td><td>Ready for Sprint</td></tr>
+            <tr><td class="font-mono">US-005</td><td>Real-Time Cart & Stock Reservation</td><td>15</td><td>18</td><td>24</td><td>15</td><td>14</td><td>9</td><td class="font-mono" style="color: #10b981; font-weight:700;">95%</td><td><span class="badge badge-completed">High Clarity</span></td><td>Ready for Sprint</td></tr>
+            <tr><td class="font-mono">US-006</td><td>Multi-Step Checkout with Address Validation</td><td>15</td><td>20</td><td>25</td><td>15</td><td>14</td><td>8</td><td class="font-mono" style="color: #10b981; font-weight:700;">97%</td><td><span class="badge badge-completed">High Clarity</span></td><td>Ready for Sprint</td></tr>
+            <tr><td class="font-mono">US-007</td><td>Stripe, PayPal & Apple Pay Integration</td><td>15</td><td>20</td><td>25</td><td>15</td><td>13</td><td>9</td><td class="font-mono" style="color: #10b981; font-weight:700;">97%</td><td><span class="badge badge-completed">High Clarity</span></td><td>Ready for Sprint</td></tr>
+            <tr><td class="font-mono">US-008</td><td>Automated Order Confirmation & PDF Invoice</td><td>14</td><td>18</td><td>22</td><td>14</td><td>15</td><td>7</td><td class="font-mono" style="color: #10b981; font-weight:700;">90%</td><td><span class="badge badge-completed">High Clarity</span></td><td>Ready for Sprint</td></tr>
+            <tr><td class="font-mono">US-009</td><td>Customer Order History & Live GPS Tracking</td><td>14</td><td>18</td><td>23</td><td>13</td><td>14</td><td>8</td><td class="font-mono" style="color: #10b981; font-weight:700;">90%</td><td><span class="badge badge-completed">High Clarity</span></td><td>Ready for Sprint</td></tr>
+            <tr><td class="font-mono">US-010</td><td>Team Uniform & Jersey Customizer</td><td>15</td><td>19</td><td>24</td><td>12</td><td>12</td><td>6</td><td class="font-mono" style="color: #10b981; font-weight:700;">88%</td><td><span class="badge badge-completed">High Clarity</span></td><td>Ready for Sprint</td></tr>
+            <tr><td class="font-mono">US-011</td><td>Warehouse ERP Real-Time Stock Sync</td><td>13</td><td>17</td><td>21</td><td>12</td><td>13</td><td>7</td><td class="font-mono" style="color: #38bdf8; font-weight:700;">83%</td><td><span class="badge badge-should">Medium Clarity</span></td><td>Needs Minor Grooming</td></tr>
+            <tr><td class="font-mono">US-012</td><td>Promo Engine & Bulk Tier Discounts</td><td>14</td><td>18</td><td>22</td><td>14</td><td>14</td><td>8</td><td class="font-mono" style="color: #10b981; font-weight:700;">90%</td><td><span class="badge badge-completed">High Clarity</span></td><td>Ready for Sprint</td></tr>
+            <tr><td class="font-mono">US-013</td><td>Customer Reviews, Photo Uploads & Q&A</td><td>12</td><td>15</td><td>18</td><td>11</td><td>14</td><td>6</td><td class="font-mono" style="color: #f59e0b; font-weight:700;">76%</td><td><span class="badge badge-should">Medium Clarity</span></td><td>Needs Minor Grooming</td></tr>
+            <tr><td class="font-mono">US-014</td><td>Self-Service Returns & RMA Portal</td><td>14</td><td>17</td><td>22</td><td>12</td><td>13</td><td>7</td><td class="font-mono" style="color: #10b981; font-weight:700;">85%</td><td><span class="badge badge-completed">High Clarity</span></td><td>Ready for Sprint</td></tr>
+            <tr><td class="font-mono">US-015</td><td>Executive Operations & Sales Dashboard</td><td>15</td><td>19</td><td>23</td><td>13</td><td>14</td><td>8</td><td class="font-mono" style="color: #10b981; font-weight:700;">92%</td><td><span class="badge badge-completed">High Clarity</span></td><td>Ready for Sprint</td></tr>
+          </tbody>
+          <tfoot>
+            <tr style="background: rgba(16, 185, 129, 0.1); font-weight: 700;">
+              <td colspan="8">AVERAGE STORY CLARITY INDEX</td>
+              <td class="font-mono" style="color: #10b981; font-size: 1.15rem;">91.5%</td>
+              <td colspan="2" style="color: #10b981;">High Readiness (&ge; 85%)</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Epic Sports Agile Project Workbook &bull; Compliant with ABABE-ABE-45 Guidelines &bull; HCLTech Career Shaper LMS</p>
+  </footer>
+
+  <script>
+    // Tab switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
+      const activeContent = document.getElementById(tabId);
+      if (activeContent) {
+        activeContent.classList.add('active');
+      }
+
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => {
+        if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(tabId)) {
+          btn.classList.add('active');
+        }
+      });
+    }
+
+    // Dark / Light Theme Toggle
+    function toggleTheme() {
+      const currentTheme = document.body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', newTheme);
+      document.getElementById('themeIcon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    // Search functionality across visible tables
+    function handleSearch() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const activeTab = document.querySelector('.tab-content.active');
+      if (!activeTab) return;
+
+      const rows = activeTab.querySelectorAll('tbody tr');
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(query) ? '' : 'none';
+      });
+    }
+
+    // Filter Backlog by Status
+    function filterByStatus(status) {
+      document.querySelectorAll('.pill-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      switchTab('tab-backlog');
+      const rows = document.querySelectorAll('#backlogBody tr');
+      rows.forEach(row => {
+        const rowStatus = row.getAttribute('data-status');
+        if (status === 'all' || rowStatus === status) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    // Export current active table to CSV
+    function exportTableToCSV() {
+      const activeTab = document.querySelector('.tab-content.active');
+      if (!activeTab) return;
+      const table = activeTab.querySelector('table');
+      if (!table) {
+        alert('No data table found in current tab.');
+        return;
+      }
+
+      let csv = [];
+      const rows = table.querySelectorAll('tr');
+      rows.forEach(row => {
+        if (row.style.display === 'none') return;
+        let cols = [];
+        row.querySelectorAll('th, td').forEach(col => {
+          let text = col.innerText.replace(/"/g, '""').trim();
+          cols.push('"' + text + '"');
+        });
+        csv.push(cols.join(','));
+      });
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv.join('\n'));
+      const link = document.createElement('a');
+      link.setAttribute('href', csvContent);
+      link.setAttribute('download', activeTab.id.replace('tab-', '') + '_export.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
